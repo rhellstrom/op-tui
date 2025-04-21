@@ -3,9 +3,7 @@
 op-tui is a fast, terminal-based interface for fuzzy finding between your 1password items and quickly
 fetching secrets to your system clipboard.
 
-<img src="" alt=""/> 
-
-GIF created with [VHS](https://github.com/charmbracelet/vhs) </p>
+<img src="https://github.com/rhellstrom/op-tui/blob/main/demo.gif" alt=""/> 
 
 ## Quickstart
 op-tui is a TUI wrapper that uses the [1password CLI](https://developer.1password.com/docs/cli/get-started/)
