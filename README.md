@@ -10,6 +10,16 @@ op-tui is a TUI wrapper that uses the [1password CLI](https://developer.1passwor
 to retrieve your 1password items and fuzzy find over them with [Skim](https://github.com/skim-rs/skim).
 The selected secret is then fetched and copied to the clipboard using [Arboard](https://github.com/1Password/arboard).
 
+### Installation
+
+To compile and run it using [Cargo](https://doc.rust-lang.org/cargo/) from the root of the project:
+
+```
+cargo run --release
+```
+
+The first run will prompt you for Authorization to 1password and then all items from specified vault will be retrieved - this takes a few seconds depending on what vault you chose(default is all items in all vaults).
+
 ### Design
 
 Relevant items and their fields and sections are retrieved using the [item subcommands list and get](https://developer.1password.com/docs/cli/reference/management-commands/item/)
