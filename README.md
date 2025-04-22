@@ -12,29 +12,28 @@ The selected secret is then fetched and copied to the clipboard using [Arboard](
 
 ### Installation
 
-To compile and run it using [Cargo](https://doc.rust-lang.org/cargo/) from the root of the project:
+To compile the project with [Cargo](https://doc.rust-lang.org/cargo/) run the following command from the root
+of the project. This will let you try it out without writing to any files.
 
 ```
-cargo run --release
+cargo run -- --no-cache
 ```
 
 The first run will prompt you for Authorization to 1password and then all items from specified vault will be retrieved - this takes a few seconds depending on what vault you chose(default is all items in all vaults).
 
-### Design
-
-Relevant items and their fields and sections are retrieved using the [item subcommands list and get](https://developer.1password.com/docs/cli/reference/management-commands/item/)
-in JSON format. Relevant fields are then deserialized using [Serde](https://serde.rs/).
-
-The item metadata is stored either in memory or written to a cache file to improve performance since 
-obtaining the item data using the 1password CLI is a time consuming operation. 
-See CLI options below.
-
-We store no actual secrets in-memory or the in cache file. We only store the titles and the associated secret reference.
-Once we've selected an item the reference of that items is returned. [op read](https://developer.1password.com/docs/cli/reference/commands/read)
-is then used to retrieve the password/secret and paste it to the clipboard.
-
 This tool requires that the [1password desktop app integration](https://developer.1password.com/docs/cli/get-started/#step-2-turn-on-the-1password-desktop-app-integration
 ) is configured.
+
+### Design
+
+Relevant items and sections are retrieved using the [item](https://developer.1password.com/docs/cli/reference/management-commands/item/) in JSON format and 
+then deserialized using [Serde](https://serde.rs/).
+
+The item metadata is stored either in memory or written to a cache file to improve performance since 
+obtaining the item data using the 1password CLI is a time consuming operation (See CLI options below).
+
+Only titles and their secret reference is stored in-memory and in the cache file. When an item is selected the secret
+is retrieved using the reference in combination with [op read](https://developer.1password.com/docs/cli/reference/commands/read) and pasted to the clipboard.
 
 For information on the Authorization and Security model of this integration see: https://developer.1password.com/docs/cli/app-integration-security
 
@@ -53,4 +52,5 @@ Options:
   -V, --version        Print version
 
 ```
-## License
+
+
