@@ -58,7 +58,7 @@ pub fn run(config: Config) -> OpTuiResult<()> {
                 match secret {
                     Ok(content) => {
                         if !content.trim().is_empty(){
-                            copy_to_clipboard(content)?
+                            copy_to_clipboard(content.trim_end().to_owned())?
                         }
                     },
                     Err(e) => error!("Failure getting to secret, {}", e),
