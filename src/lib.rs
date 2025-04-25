@@ -35,7 +35,7 @@ pub fn run(config: Config) -> OpTuiResult<()> {
     info!("{:#?}", config);
     let items = init(config)?;
     let options = SkimOptionsBuilder::default()
-        .height(String::from("100%"))
+        .no_height(true)
         .multi(false)
         .build()
         .expect("Error starting Skim");
@@ -78,6 +78,7 @@ fn fetch_and_cache_items(config: &Config) -> OpTuiResult<Vec<Item>> {
 
 fn init(config: Config) -> OpTuiResult<Vec<Item>> {
     if config.no_cache {
+        println!("Retrieving items from 1password...");
         return fetch_items(config.vault);
     }
 

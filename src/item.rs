@@ -9,7 +9,6 @@ struct ItemRaw {
     title: String,
     #[serde(default)]
     tags: Vec<String>,
-    vault: Vault,
     fields: Vec<Field>,
 }
 
@@ -42,7 +41,6 @@ pub struct SectionRaw {
 pub struct Item {
     pub title: String,
     pub tags: Vec<String>,
-    pub vault: String,
     pub sections: Vec<Section>,
 }
 
@@ -67,7 +65,6 @@ impl SkimItem for Section {
 #[allow(dead_code)]
 impl Item {
     fn from_raw(raw: ItemRaw) -> Self {
-        let vault = raw.vault.name;
         let mut reference = None;
 
         let sections = raw.fields
@@ -93,7 +90,6 @@ impl Item {
         Item {
             title: raw.title,
             tags: raw.tags,
-            vault,
             sections,
         }
     }
